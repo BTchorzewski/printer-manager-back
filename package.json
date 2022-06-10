@@ -1,0 +1,46 @@
+{
+  "name": "printermanagerapi",
+  "version": "0.1.0",
+  "description": "API for the printer manager app.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node build/server.js",
+    "start:dev": "tsnd src/server.ts",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BTchorzewski/printerManagerApi.git"
+  },
+  "author": "BTchorzewski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BTchorzewski/printerManagerApi/issues"
+  },
+  "homepage": "https://github.com/BTchorzewski/printerManagerApi#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^28.1.1",
+    "@types/node": "^17.0.41",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "jest": "^28.1.1",
+    "supertest": "^6.2.3",
+    "ts-jest": "^28.0.4",
+    "ts-node": "^10.8.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.3"
+  }
+}
