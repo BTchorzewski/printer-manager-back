@@ -6,7 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 # config file
-config/config.ts
+src/config/config.ts
+src/config/config.ts
 #build
 build
 # Diagnostic reports (https://nodejs.org/api/report.html)

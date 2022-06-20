@@ -1,7 +1,7 @@
 import cors from 'cors';
-import express, { json } from 'express';
-import { config } from '../config/config';
-import { errorHandler } from './utils/error-handler';
+import express, {json} from 'express';
+import {config} from './config/config';
+import {errorHandler} from './utils/error-handler';
 
 const app = express();
 
