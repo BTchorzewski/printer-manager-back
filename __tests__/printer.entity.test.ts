@@ -12,7 +12,6 @@ describe('Printer entity tests', () => {
       expect(printer.id).toMatch(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gm)
     })
   })
-
   describe('name property tests.', () => {
 
     test('Printer entity name property.', () => {
@@ -31,16 +30,6 @@ describe('Printer entity tests', () => {
       }).toThrowError('invalid ip address.')
     })
   })
-
-  describe('name property tests.', () => {
-    test('Printer entity name property.', () => {
-      expect(printer).toHaveProperty('name');
-      expect(printer.name).toBeDefined();
-      //  @todo check MFP and CSD prefixes.
-    })
-
-  })
-
   describe('isMultifunctional', () => {
 
     test('Printer entity has isMultifunctional property.', () => {
@@ -53,7 +42,6 @@ describe('Printer entity tests', () => {
     })
 
   })
-
   describe('area property tests.', () => {
 
     test('Printer entity has area property.', () => {
@@ -62,7 +50,6 @@ describe('Printer entity tests', () => {
     })
 
   })
-
   describe('location property tests.', () => {
 
     test('Printer entity has location property.', () => {
@@ -71,7 +58,6 @@ describe('Printer entity tests', () => {
     })
 
   })
-
   describe('model property tests.', () => {
 
     test('Printer entity has model property.', () => {
@@ -85,5 +71,4 @@ describe('Printer entity tests', () => {
     })
 
   })
-
 })
