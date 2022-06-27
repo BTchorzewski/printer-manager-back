@@ -1,7 +1,8 @@
 import { PrinterModel } from '../../types';
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { SupplyEntity } from './supply.entity';
+import { StoreEntity } from './store.entity';
 
+//@todo specify enum in printer entitty
 @Entity()
 export class PrinterEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -28,6 +29,6 @@ export class PrinterEntity extends BaseEntity {
   @Column({ length: 500 })
   location: string;
 
-  @OneToMany(() => SupplyEntity, supply => supply.id)
-  supplies: SupplyEntity[]
+  @OneToMany(() => StoreEntity, store => store.id)
+  supplies: StoreEntity[];
 }
