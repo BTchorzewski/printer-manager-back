@@ -6,6 +6,7 @@ export enum PrinterModel {
   Xerox_AltaLink_C8035 = 'Xerox AltaLink C8035',
   Xerox_VersaLink_C605 = 'Xerox VersaLink C605',
   Xerox_VersaLink_C400 = 'Xerox VersaLink C400',
+  Unspecified = 'Unspecified',
 }
 
 export interface Printer {
@@ -16,5 +17,14 @@ export interface Printer {
   area: string;
   location: string;
   model: PrinterModel;
-  supplies: Supply[];
+  supplies?: Supply[];
+}
+
+export type AddPrinterRequest = Omit<Printer, 'id'>
+
+export type PrinterRespond = {
+  msg: 'Succeed';
+  data: Printer[];
+} | {
+  msg: 'Fails';
 }

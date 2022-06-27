@@ -4,9 +4,19 @@ export interface Supply {
   id: string;
   name: string;
   code: string;
-  isAvailable: boolean;
   model: PrinterModel;
-  storedAt: Date;
-  installedAt: Date;
   printerId?: string;
+}
+
+export type AddSupplyRequest = Omit<Supply, 'id'>
+
+export type SupplyParam = {
+  id: string;
+}
+
+export type SupplyRespond = {
+  msg: 'Succeed';
+  data: Supply[];
+} | {
+  msg: 'Fails';
 }
