@@ -1,7 +1,8 @@
 import cors from 'cors';
-import express, {json} from 'express';
-import {config} from './config/config';
-import {errorHandler} from './utils/error-handler';
+import express, { json } from 'express';
+import { config } from './config/config';
+import { errorHandler } from './utils/error-handler';
+import printerRouter from './routes/printer.router';
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.use(json())
 app.use(cors({
   origin: config.corsOrigin ?? 'http://localhost:3001/'
 }))
+
+app.use('/api', printerRouter)
 
 app.use(errorHandler)
 export default app;

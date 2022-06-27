@@ -1,9 +1,9 @@
 import { PrinterModel } from '../../types';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { SupplyEntity } from './supply.entity';
 
 @Entity()
-export class PrinterEntity {
+export class PrinterEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
