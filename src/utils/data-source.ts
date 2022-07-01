@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { config } from '../config/config';
 import { PrinterEntity } from '../entities/printer.entity';
 import { SupplyEntity } from '../entities/supply.entity';
@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
   username: config.db.username,
   password: config.db.password,
   database: config.db.database,
-  synchronize: false,
+  synchronize: true,
   logging: false,
   entities: [PrinterEntity, SupplyEntity, StoreEntity],
   migrations: ['build/src/migrations/*{.ts,.js}'],
@@ -20,5 +20,5 @@ export const AppDataSource = new DataSource({
   // @ts-ignore
   cli: {
     migrationsDir: 'build/src/migrations'
-  }
-}) as unknown as DataSourceOptions;
+  },
+});
