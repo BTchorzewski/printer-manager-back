@@ -20,3 +20,8 @@ export type SupplyRespond = {
 } | {
   msg: 'Fails';
 }
+
+export interface InstallSupplyRequest {
+  printerId: string;
+  supplyId: string;
+}
