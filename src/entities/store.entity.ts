@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { PrinterEntity } from './printer.entity';
 import { SupplyEntity } from './supply.entity';
 
@@ -10,7 +10,7 @@ export class StoreEntity extends BaseEntity {
   @Column({ default: true })
   isAvailable: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   installedAt: Date;
 
   @Column({
@@ -18,9 +18,11 @@ export class StoreEntity extends BaseEntity {
   })
   storedAt: Date;
 
-  @ManyToOne(() => PrinterEntity, printer => printer.id)
+  @ManyToOne(() => PrinterEntity, printer => printer.supplies)
+  @JoinColumn()
   printer: PrinterEntity;
 
-  @ManyToOne(() => SupplyEntity, supply => supply.id)
+  @ManyToOne(() => SupplyEntity, supply => supply.stores)
+  @JoinColumn()
   supply: SupplyEntity;
 }
