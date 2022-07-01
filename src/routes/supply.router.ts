@@ -1,10 +1,18 @@
 import { Router } from 'express';
-import { addSupply, deleteSupply, getAllSupplies, getSupplyById, updateSupply } from '../controllers/supply.controller';
+import {
+  addSupply,
+  deleteSupply,
+  getAllSupplies,
+  getAvailableSupplies,
+  getSupplyById,
+  updateSupply
+} from '../controllers/supply.controller';
 
 const supplyRouter = Router();
 
 supplyRouter
   .get('/supplies', getAllSupplies)
+  .get('/supplies/available', getAvailableSupplies)
   .get('/supplies/:id', getSupplyById)
   .post('/supplies', addSupply)
   .put('/supplies/:id', updateSupply)
