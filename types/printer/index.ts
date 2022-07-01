@@ -1,4 +1,4 @@
-import { Supply } from '../supply';
+import { BasicStoreItem, StoreItem } from '../store';
 
 export type PrinterTest = string;
 
@@ -17,14 +17,18 @@ export interface Printer {
   area: string;
   location: string;
   model: PrinterModel;
-  supplies?: Supply[];
+}
+
+
+export interface PrinterWithHistory extends Printer {
+  supplies: BasicStoreItem[];
 }
 
 export type AddPrinterRequest = Omit<Printer, 'id'>
 
 export type PrinterRespond = {
   msg: 'Succeed';
-  data: Printer[];
+  data: Printer[] | StoreItem[];
 } | {
   msg: 'Fails';
 }

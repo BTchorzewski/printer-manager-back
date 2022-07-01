@@ -4,6 +4,7 @@ import {
   deletePrinter,
   getAllPrinters,
   getPrinterById,
+  installSupply,
   updatePrinter
 } from '../controllers/printer.controller';
 
@@ -13,6 +14,7 @@ printerRouter
   .get('/printers', getAllPrinters)
   .get('/printers/:id', getPrinterById)
   .post('/printers', addPrinter)
+  .post('/printers/:printerId/supply/:supplyId', installSupply)
   .put('/printers/:id', updatePrinter)
   .delete('/printers/:id', deletePrinter);
 
