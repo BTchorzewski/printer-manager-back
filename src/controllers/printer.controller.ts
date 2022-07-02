@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
-import { AddPrinterRequest, InstallSupplyRequest, PrinterRespond, PrinterWithHistory } from '../../types';
-import { PrinterEntity } from '../entities/printer.entity';
-import { StoreEntity } from '../entities/store.entity';
-import { ValidationError } from '../utils/error-handler';
-import { AppDataSource } from '../utils/data-source';
+import {NextFunction, Request, Response} from 'express';
+import {AddPrinterRequest, InstallSupplyRequest, PrinterRespond, PrinterWithHistory} from '../../types';
+import {PrinterEntity} from '../entities/printer.entity';
+import {StoreEntity} from '../entities/store.entity';
+import {ValidationError} from '../utils/error-handler';
+import {AppDataSource} from '../utils/data-source';
 
 export const getAllPrinters = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -164,7 +164,7 @@ export const installSupply = async (req: Request, res: Response, next: NextFunct
     if (printer === undefined) return next(new ValidationError('Invalid printer id.'));
 
     //cannot install an unsuitable supply.
-    if (printer.model !== availableSupply.supply.model) return next(new ValidationError('cant install the unsuitable supply.'));
+    if (printer.model !== availableSupply.supply.model) return next(new ValidationError('can not install the unsuitable supply.'));
 
     availableSupply.printer = printer;
     availableSupply.isAvailable = false;
