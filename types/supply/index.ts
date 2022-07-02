@@ -1,4 +1,4 @@
-import { PrinterModel } from '../printer';
+import {PrinterModel} from '../printer';
 
 export interface Supply {
   id: string;
@@ -24,4 +24,20 @@ export type SupplyRespond = {
 export interface InstallSupplyRequest {
   printerId: string;
   supplyId: string;
+}
+
+export interface SuppliesByModelParam {
+  model: PrinterModel;
+}
+
+export interface SupplyAvailability {
+  id: string;
+  name: string;
+  total: number;
+  totalAvailable: number;
+}
+
+export interface ListSupplies {
+  id: string;
+  name: string;
 }
