@@ -1,6 +1,6 @@
-import { PrinterModel } from '../../types';
-import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { StoreEntity } from './store.entity';
+import {PrinterModel} from '../../types';
+import {BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {StoreEntity} from './store.entity';
 
 @Entity()
 export class SupplyEntity extends BaseEntity {
@@ -15,18 +15,8 @@ export class SupplyEntity extends BaseEntity {
 
   @Column()
   code: string;
-
+  //@todo rename stores to stored.
   @OneToMany(() => StoreEntity, store => store.supply)
   @JoinColumn()
   stores: StoreEntity[];
-
-  // addStoreItem(storeItem: StoreEntity){
-  //   if(this.stores === undefined) {
-  //
-  //     // @ts-ignore
-  //     this.stores = new Array<StoreEntity>();
-  //   }
-  //   // @ts-ignore
-  //   this.stores.push(storeItem)
-  // }
 }
