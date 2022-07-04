@@ -112,19 +112,24 @@ export const updatePrinter = async (req: Request, res: Response, next: NextFunct
   const fetchedPrinter = await PrinterEntity.findOne({ where: { id } });
   // sends error when printer was not found.
   if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
+  try {
+    fetchedPrinter.name = name;
+    fetchedPrinter.ip = ip;
+    fetchedPrinter.model = model;
+    fetchedPrinter.isMultifunctional = isMultifunctional;
+    fetchedPrinter.area = area;
+    fetchedPrinter.location = location;
+    await fetchedPrinter.save();
+    // @todo add validation
+    // @todo can not change model if the printer has already been supplied.
+    res.json({
+      msg: 'Succeed',
+      data: [fetchedPrinter],
+    } as unknown as PrinterRespond);
 
-  fetchedPrinter.name = name;
-  fetchedPrinter.ip = ip;
-  fetchedPrinter.model = model;
-  fetchedPrinter.isMultifunctional = isMultifunctional;
-  fetchedPrinter.area = area;
-  fetchedPrinter.location = location;
-  await fetchedPrinter.save();
-
-  res.json({
-    msg: 'Succeed',
-    data: [fetchedPrinter],
-  } as unknown as PrinterRespond);
+  } catch (e) {
+    next(e);
+  }
 };
 
 export const deletePrinter = async (req: Request, res: Response, next: NextFunction) => {
