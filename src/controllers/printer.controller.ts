@@ -40,10 +40,22 @@ export const getAllPrinters = async (req: Request, res: Response, next: NextFunc
 };
 
 export const getPrinterById = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
+  const {id} = req.params;
+  const fetchedPrinter = await PrinterEntity.findOneBy({id})
+  if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
+
+  res.json({
+    msg: 'Succeed',
+    data: [fetchedPrinter]
+  } as PrinterRespond);
+
+
+};
+export const getPrinterWithHistoryById = async (req: Request, res: Response, next: NextFunction) => {
+  const {id} = req.params;
   const fetchedPrinter = await AppDataSource
     .createQueryBuilder()
-    .where('printer.id = :id', { id })
+    .where('printer.id = :id', {id})
     .select('printer')
     .from(PrinterEntity, 'printer')
     .leftJoinAndSelect('printer.supplies', 'stores')
@@ -56,7 +68,7 @@ export const getPrinterById = async (req: Request, res: Response, next: NextFunc
   const printer = {
     ...fetchedPrinter,
     supplies: fetchedPrinter.supplies.map(storeItem => {
-      const { supply } = storeItem;
+      const {supply} = storeItem;
       return {
         name: supply.name,
         installedAt: storeItem.installedAt,
