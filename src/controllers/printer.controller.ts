@@ -1,9 +1,9 @@
-import {NextFunction, Request, Response} from 'express';
-import {AddPrinterRequest, InstallSupplyRequest, PrinterRespond, PrinterWithHistory} from '../../types';
-import {PrinterEntity} from '../entities/printer.entity';
-import {StoreEntity} from '../entities/store.entity';
-import {ValidationError} from '../utils/error-handler';
-import {AppDataSource} from '../utils/data-source';
+import { NextFunction, Request, Response } from 'express';
+import { AddPrinterRequest, InstallSupplyRequest, PrinterRespond, PrinterWithHistory } from '../../types';
+import { PrinterEntity } from '../entities/printer.entity';
+import { StoreEntity } from '../entities/store.entity';
+import { ValidationError } from '../utils/error-handler';
+import { AppDataSource } from '../utils/data-source';
 
 export const getAllPrinters = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -138,8 +138,20 @@ export const deletePrinter = async (req: Request, res: Response, next: NextFunct
   // sends error when id param is undefined.
   if (!id) return res.json({ msg: 'Fails' } as PrinterRespond);
 
-  const fetchedPrinter = await PrinterEntity.findOne({ where: { id } });
+  const fetchedPrinter = await PrinterEntity.findOne({
+    where: { id }, relations: {
+      supplies: true,
+    }
+  });
   if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
+
+  //if printer has installed supplies, we have to remove the supplies from the store.
+  await AppDataSource
+    .createQueryBuilder()
+    .delete()
+    .from(StoreEntity)
+    .where('printerId = :id', { id: fetchedPrinter.id })
+    .execute()
 
   await fetchedPrinter.remove();
 
