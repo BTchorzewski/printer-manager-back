@@ -31,4 +31,5 @@ export type PrinterRespond = {
   data: Printer[] | StoreItem[];
 } | {
   msg: 'Fails';
+  data: null;
 }

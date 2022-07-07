@@ -13,6 +13,7 @@ export type StoreRespond = {
   data: StoreItem[];
 } | {
   msg: 'Fails';
+  data: null;
 }
 
 
