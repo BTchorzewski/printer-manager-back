@@ -26,6 +26,7 @@ export interface StoreItem {
 }
 
 export interface BasicStoreItem {
+  storeId: string;
   installedAt: Date;
   name: string;
 }

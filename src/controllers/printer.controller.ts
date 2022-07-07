@@ -70,6 +70,7 @@ export const getPrinterWithHistoryById = async (req: Request, res: Response, nex
     supplies: fetchedPrinter.supplies.map(storeItem => {
       const {supply} = storeItem;
       return {
+        storeId: supply.id,
         name: supply.name,
         installedAt: storeItem.installedAt,
       }
