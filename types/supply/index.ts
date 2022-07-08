@@ -1,4 +1,6 @@
-import {PrinterModel} from '../printer';
+// @ts-ignore
+
+import { PrinterModel } from '../printer';
 
 export interface Supply {
   id: string;
@@ -35,9 +37,19 @@ export interface SupplyAvailability {
   name: string;
   total: number;
   totalAvailable: number;
+  model?: PrinterModel;
 }
 
 export interface ListSupplies {
   id: string;
   name: string;
+  model?: PrinterModel;
 }
+
+const models = Array.from(Object.values(PrinterModel));
+export type Models = typeof models[number];
+
+export type ListSuppliesWithAvailability = {
+  model: PrinterModel;
+  supplies: SupplyAvailability[];
+};

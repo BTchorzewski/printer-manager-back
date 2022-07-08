@@ -1,14 +1,26 @@
-import {NextFunction, Request, Response} from 'express';
-import {SupplyEntity} from '../entities/supply.entity';
-import {AddSupplyRequest, SuppliesByModelParam, SupplyParam, SupplyRespond} from '../../types';
-import {ValidationError} from '../utils/error-handler';
-import {checkSupplyAvailability, isAccurateModel, listSuppliesForPrinter} from "../utils/supply";
+import { NextFunction, Request, Response } from 'express';
+import { SupplyEntity } from '../entities/supply.entity';
+import { AddSupplyRequest, SuppliesByModelParam, SupplyParam, SupplyRespond } from '../../types';
+import { ValidationError } from '../utils/error-handler';
+import {
+  checkSupplyAvailability,
+  groupSuppliesByModel,
+  isAccurateModel,
+  listSuppliesForPrinter
+} from "../utils/supply";
 
 export const getAllSupplies = async (req: Request, res: Response, next: NextFunction) => {
-  const allSupplies = await SupplyEntity.find();
+  const SuppliesList = await SupplyEntity.find({
+    select: ['id', 'name', 'model'],
+  });
+
+  const allSuppliesWithAvailability = await checkSupplyAvailability(SuppliesList);
+
+  const categorizedSupplies = groupSuppliesByModel(allSuppliesWithAvailability)
+
   res.json({
     msg: 'Succeed',
-    data: [...allSupplies],
+    data: [...categorizedSupplies],
   } as unknown as SupplyRespond)
 };
 

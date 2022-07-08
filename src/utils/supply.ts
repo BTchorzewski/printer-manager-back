@@ -1,4 +1,4 @@
-import { ListSupplies, PrinterModel, SupplyAvailability } from '../../types/index'
+import { ListSupplies, ListSuppliesWithAvailability, PrinterModel, SupplyAvailability } from '../../types/index'
 import { SupplyEntity } from "../entities/supply.entity";
 import { StoreEntity } from "../entities/store.entity";
 
@@ -40,8 +40,20 @@ export const checkSupplyAvailability = async (listOfSupplies: ListSupplies[]): P
     return {
       id: supply.id,
       name: supply.name,
+      model: supply.model,
       total,
       totalAvailable,
     }
   }));
+}
+
+export const groupSuppliesByModel = (listOfSupplies: SupplyAvailability[]): ListSuppliesWithAvailability[] => {
+  const models = (Object.values(PrinterModel));
+  const results = models.map((model) => {
+    return {
+      model,
+      supplies: listOfSupplies.filter(supply => supply.model === model),
+    }
+  })
+  return results
 }
