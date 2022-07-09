@@ -55,8 +55,9 @@ export const addItemToStore = async (req: Request, res: Response, next: NextFunc
     const newItemsToStore = createStoreItems(quantity);
     await Promise.all(newItemsToStore.map(async item => {
       item.supply = supply;
-      await item;
+      await item.save();
     }))
+
     res.json({msg: `added ${quantity} - ${supply.name} for ${supply.model}.`})
   } catch (e) {
     console.log(e)
