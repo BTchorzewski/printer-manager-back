@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
-import { AddPrinterRequest, InstallSupplyRequest, PrinterRespond, PrinterWithHistory } from '../../types';
-import { PrinterEntity } from '../entities/printer.entity';
-import { StoreEntity } from '../entities/store.entity';
-import { ValidationError } from '../utils/error-handler';
-import { AppDataSource } from '../utils/data-source';
+import {NextFunction, Request, Response} from 'express';
+import {AddPrinterRequest, InstallSupplyRequest, PrinterRespond, PrinterWithHistory} from '../../types';
+import {PrinterEntity} from '../entities/printer.entity';
+import {StoreEntity} from '../entities/store.entity';
+import {ValidationError} from '../utils/error-handler';
+import {AppDataSource} from '../utils/data-source';
 
 export const getAllPrinters = async (req: Request, res: Response, next: NextFunction) => {
   try {
