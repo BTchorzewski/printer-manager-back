@@ -1,9 +1,9 @@
-import { PrinterModel } from '../../types';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { PrinterEntity } from './printer.entity';
+import {PrinterModel} from '../../types';
+import {BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {StoreEntity} from './store.entity';
 
 @Entity()
-export class SupplyEntity {
+export class SupplyEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -15,16 +15,8 @@ export class SupplyEntity {
 
   @Column()
   code: string;
-
-  @Column()
-  isAvailable: boolean;
-
-  @Column()
-  installedAt: Date;
-
-  @Column()
-  storedAt: Date;
-
-  @ManyToOne(() => PrinterEntity, printer => printer.id)
-  printerId: PrinterEntity;
+  //@todo rename stores to stored.
+  @OneToMany(() => StoreEntity, store => store.supply)
+  @JoinColumn()
+  stores: StoreEntity[];
 }
