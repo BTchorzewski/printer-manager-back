@@ -44,14 +44,20 @@ export const getAllPrinters = async (req: Request, res: Response, next: NextFunc
 };
 
 export const getPrinterById = async (req: Request, res: Response, next: NextFunction) => {
-  const {id} = req.params;
-  const fetchedPrinter = await PrinterEntity.findOneBy({id})
-  if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
+  try {
+    const { id } = req.params;
+    const fetchedPrinter = await PrinterEntity.findOneBy({ id })
+    if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
 
-  res.json({
-    msg: 'Succeed',
-    data: [fetchedPrinter]
-  } as PrinterRespond);
+    res.json({
+      msg: 'Succeed',
+      data: [fetchedPrinter]
+    } as PrinterRespond);
+
+  } catch (e) {
+    const er = new ValidationError(e.message)
+    next(er);
+  }
 
 
 };
