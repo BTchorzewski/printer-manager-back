@@ -33,8 +33,11 @@ export const getAllPrinters = async (req: Request, res: Response, next: NextFunc
       msg: 'Succeed',
       data: [...printers],
     } as unknown as PrinterRespond);
-  } catch (e) {
-    throw new Error(e);
+  }
+    // @ts-ignore
+  catch (e: Error) {
+    const er = new ValidationError(e.message)
+    next(er);
   }
 
 };
