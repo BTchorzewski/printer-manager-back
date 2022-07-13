@@ -1,9 +1,6 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { config } from '../config/config';
-import { PrinterEntity } from '../entities/printer.entity';
-import { SupplyEntity } from '../entities/supply.entity';
-import { StoreEntity } from '../entities/store.entity';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
@@ -14,7 +11,7 @@ export const AppDataSource = new DataSource({
   database: config.db.database,
   synchronize: true,
   logging: false,
-  entities: [PrinterEntity, SupplyEntity, StoreEntity],
+  entities: ['build/src/entities/*.entity.js'],
   migrations: ['build/src/migrations/*{.ts,.js}'],
   subscribers: [],
   // @ts-ignore
