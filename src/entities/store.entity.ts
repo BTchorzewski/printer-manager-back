@@ -19,7 +19,6 @@ export class StoreEntity extends BaseEntity {
   storedAt: Date;
 
   @ManyToOne(() => PrinterEntity, printer => printer.supplies)
-  @JoinColumn()
   printer: PrinterEntity;
 
   @ManyToOne(() => SupplyEntity, supply => supply.stores)

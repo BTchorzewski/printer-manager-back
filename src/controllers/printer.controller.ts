@@ -16,6 +16,7 @@ export const getAllPrinters = async (req: Request, res: Response, next: NextFunc
       .leftJoinAndSelect('stores.supply', 'supply')
       .getMany();
 
+
     const printers = fetchedPrinters.map(printer => {
       return {
         ...printer,
