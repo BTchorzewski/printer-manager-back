@@ -62,34 +62,40 @@ export const getPrinterById = async (req: Request, res: Response, next: NextFunc
 
 };
 export const getPrinterWithHistoryById = async (req: Request, res: Response, next: NextFunction) => {
-  const {id} = req.params;
-  const fetchedPrinter = await AppDataSource
-    .createQueryBuilder()
-    .where('printer.id = :id', {id})
-    .select('printer')
-    .from(PrinterEntity, 'printer')
-    .leftJoinAndSelect('printer.supplies', 'stores')
-    .leftJoinAndSelect('stores.supply', 'supply')
-    .getOne();
+  const { id } = req.params;
+  try {
 
-  //check if a printer exists.
-  if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
+    const fetchedPrinter = await AppDataSource
+      .createQueryBuilder()
+      .where('printer.id = :id', { id })
+      .select('printer')
+      .from(PrinterEntity, 'printer')
+      .leftJoinAndSelect('printer.supplies', 'stores')
+      .leftJoinAndSelect('stores.supply', 'supply')
+      .getOne();
 
-  const printer = {
-    ...fetchedPrinter,
-    supplies: fetchedPrinter.supplies.map(storeItem => {
-      const {supply} = storeItem;
-      return {
-        storeId: supply.id,
-        name: supply.name,
-        installedAt: storeItem.installedAt,
-      }
-    })
-  } as PrinterWithHistory;
-  res.json({
-    msg: 'Succeed',
-    data: [printer]
-  } as PrinterRespond);
+    //check if a printer exists.
+    if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
+
+    const printer = {
+      ...fetchedPrinter,
+      supplies: fetchedPrinter.supplies.map(storeItem => {
+        const {supply} = storeItem;
+        return {
+          storeId: supply.id,
+          name: supply.name,
+          installedAt: storeItem.installedAt,
+        }
+      })
+    } as PrinterWithHistory;
+    res.json({
+      msg: 'Succeed',
+      data: [printer]
+    } as PrinterRespond);
+  } catch (e) {
+    const er = new ValidationError(e.message)
+    next(er);
+  }
 
 
 };
@@ -97,19 +103,25 @@ export const getPrinterWithHistoryById = async (req: Request, res: Response, nex
 export const addPrinter = async (req: Request, res: Response, next: NextFunction) => {
   const { name, ip, area, isMultifunctional, location, model } = req.body as AddPrinterRequest;
 
-  const printerToAdd = new PrinterEntity();
-  printerToAdd.name = name;
-  printerToAdd.ip = ip;
-  printerToAdd.model = model;
-  printerToAdd.isMultifunctional = isMultifunctional;
-  printerToAdd.area = area;
-  printerToAdd.location = location;
-  await printerToAdd.save();
+  try {
 
-  res.json({
-    msg: 'Succeed',
-    data: [printerToAdd],
-  } as unknown as PrinterRespond);
+    const printerToAdd = new PrinterEntity();
+    printerToAdd.name = name;
+    printerToAdd.ip = ip;
+    printerToAdd.model = model;
+    printerToAdd.isMultifunctional = isMultifunctional;
+    printerToAdd.area = area;
+    printerToAdd.location = location;
+    await printerToAdd.save();
+
+    res.json({
+      msg: 'Succeed',
+      data: [printerToAdd],
+    } as unknown as PrinterRespond);
+  } catch (e) {
+    const er = new ValidationError(e.message)
+    next(er);
+  }
 };
 
 export const updatePrinter = async (req: Request, res: Response, next: NextFunction) => {
@@ -139,7 +151,8 @@ export const updatePrinter = async (req: Request, res: Response, next: NextFunct
     } as unknown as PrinterRespond);
 
   } catch (e) {
-    next(e);
+    const er = new ValidationError(e.message)
+    next(er);
   }
 };
 
