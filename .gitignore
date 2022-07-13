@@ -8,6 +8,8 @@ lerna-debug.log*
 # config file
 src/config/config.ts
 src/config/config.ts
+src/config/config2.ts
+
 #build
 build
 # Diagnostic reports (https://nodejs.org/api/report.html)
