@@ -76,13 +76,12 @@ export const getPrinterWithHistoryById = async (req: Request, res: Response, nex
 
     //check if a printer exists.
     if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
-
     const printer = {
       ...fetchedPrinter,
       supplies: fetchedPrinter.supplies.map(storeItem => {
         const {supply} = storeItem;
         return {
-          storeId: supply.id,
+          storeId: storeItem.id,
           name: supply.name,
           installedAt: storeItem.installedAt,
         }
