@@ -20,11 +20,10 @@ warehouse.
 [x] As a user, I want to see the number of printers on contract.
 [x] As a user, I want to receive a message about shortages in the warehouse.
 
-### elements that will be added as soon as posible.
-
-[ ] validation
-[ ] tests
-
+### elements that will be added as soon as possible.
+- validation
+- tests
+- authentication by JWT tokens.
 ## Backend Tech
 
 The printer manager uses a number of open source projects to work properly:
@@ -37,18 +36,30 @@ The printer manager uses a number of open source projects to work properly:
 - [mysql2] - MySQL client for Node.js with focus on performance.
 - [jest] - Delightful JavaScript Testing.
 - [supertest] -SuperAgent driven library for testing HTTP servers
+- [Typescript] - TypeScript is a strongly typed programming language that builds on JavaScript.
 
 ## Installation
 
-Warning! Import a database from The printer manager requires [Node.js](https://nodejs.org/) v16 to run.
+Warning! a database from 
+
+The printer manager requires [Node.js](https://nodejs.org/) 16+ to run.
 
 1. Import the database that is attached to repository in requirements directory.
 2. Use the config.example.ts from the config directory to create a config file. Leave corsOrigin undefined.
-
-// export const config = { // corsOrigin: undefined, // appPort: 3001, // db: { // host: 'localhost', // port: 3306, //
-username: 'username', // password: 'password', // database: 'database name', // } // };
-
-3. Install the dependencies and devDependencies and start the server.
+```shell
+export const config = { 
+  corsOrigin: undefined, 
+  appPort: 3001, 
+  db: { 
+    host: 'localhost', 
+    port: 3306, 
+    username: 'username', 
+    password: 'password', 
+    database: 'printer-manager', 
+     } 
+  };
+```
+4. Install the dependencies and devDependencies and start the server.
 
 ```sh
 cd printer-manager-back
@@ -58,7 +69,12 @@ npm run start:dev
 
 ## Live demo: coming soon.
 
-# Version 2.0.0
+## Frontend tech
+- [React.js] - A JavaScript library for building user interfaces.
+- [sass] - Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.
+- [React-router] -Closing in on a decade of client-side routing.
+- [Typescript] - TypeScript is a strongly typed programming language that builds on JavaScript.
 
-## user stories
+# Version 2.0.0
+More information soon
 
