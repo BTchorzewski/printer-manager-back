@@ -14,6 +14,7 @@ export interface Printer {
   name: string;
   ip: string;
   isMultifunctional: boolean;
+  installedAt: Date;
   area: string;
   location: string;
   model: PrinterModel;

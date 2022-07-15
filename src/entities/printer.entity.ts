@@ -23,6 +23,9 @@ export class PrinterEntity extends BaseEntity {
   @Column()
   isMultifunctional: boolean;
 
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  installedAt: Date;
+
   @Column({ length: 150 })
   area: string;
 

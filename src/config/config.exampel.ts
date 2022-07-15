@@ -1,5 +1,5 @@
 // export const config = {
-//   corsOrigin: 'domain name',
+//   corsOrigin: undefined,
 //   appPort: 3001,
 //   db: {
 //     host: 'localhost',

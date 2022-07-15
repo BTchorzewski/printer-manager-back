@@ -12,10 +12,10 @@ export const getAllPrinters = async (req: Request, res: Response, next: NextFunc
       .where('printer.id IS NOT NULL')
       .select('printer')
       .from(PrinterEntity, 'printer')
+      .orderBy('printer.installedAt', 'DESC')
       .leftJoinAndSelect('printer.supplies', 'stores')
       .leftJoinAndSelect('stores.supply', 'supply')
       .getMany();
-
 
     const printers = fetchedPrinters.map(printer => {
       return {
@@ -76,13 +76,12 @@ export const getPrinterWithHistoryById = async (req: Request, res: Response, nex
 
     //check if a printer exists.
     if (fetchedPrinter === null) return next(new ValidationError('the printer was not found.'));
-
     const printer = {
       ...fetchedPrinter,
       supplies: fetchedPrinter.supplies.map(storeItem => {
         const {supply} = storeItem;
         return {
-          storeId: supply.id,
+          storeId: storeItem.id,
           name: supply.name,
           installedAt: storeItem.installedAt,
         }
