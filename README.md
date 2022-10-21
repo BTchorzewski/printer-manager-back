@@ -35,7 +35,8 @@ The printer manager uses a number of open source projects to work properly:
 
 ## Installation
 
-Warning! Import a database from The printer manager requires [Node.js](https://nodejs.org/) v16 to run.
+The printer manager requires [Node.js](https://nodejs.org/) v16 to run.
+Warning! Import a database from The requirements' folder.
 
 1. Import the database that is attached to repository in requirements directory.
 2. Use the config.example.ts from the config directory to create a config file or use a template from below. Leave
